@@ -25,3 +25,35 @@
     }
 }
 ```
+
+4. In your controller class, you implement your publishers and/or your subscribers as follows:
+
+```c#
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, 
+        ISuperBootstrapEventPublisher superBootstrapPublisher, 
+        ICorrelationIdUtility correlationIdUtility)
+    {
+        _logger = logger;
+        _superBootstrapPublisher = superBootstrapPublisher;
+        _correlationIdUtility = correlationIdUtility;
+    }
+
+    [HttpGet("publish1")]
+    public async Task<ActionResult> PublishOne()
+    {
+        await _superBootstrapPublisher.PublishAsync(new SuperBootstrapEventPublishRequest
+        {
+            ObjectMessage = new DummyObject { Name = "ikan", Number = 123 },
+            CorrelationId = _correlationIdUtility.Get(),
+            TopicName = "event1"
+        });
+        return Ok();
+    }
+
+    [NonAction]
+    [SuperBootstrapEventSubscribe("event1")]
+    public void SubscriberOne(EventMessage eventMessage)
+    {
+        _logger.LogInformation($"1 -> {eventMessage.JsonMessage}");
+    }
+```
