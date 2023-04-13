@@ -4,6 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <PackageId>DesertCamel.BaseMicroservices.SuperBootstrap.Event</PackageId>
+    <Version>1.0.1</Version>
+    <Authors>mrkresnofatih</Authors>
+    <Company>mrkresnofatihdev</Company>
+    <RepositoryUrl>https://github.com/mrkresnofatih/SuperBootstrapEvent.git</RepositoryUrl>
+	  <PackageLicenseExpression>MIT OR Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
