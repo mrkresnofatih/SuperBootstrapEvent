@@ -57,3 +57,28 @@
         _logger.LogInformation($"1 -> {eventMessage.JsonMessage}");
     }
 ```
+
+5. In your startup class, implement the superbootstrap event extension method:
+
+```c#
+public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // other services
+
+            services.AddBootstrapBase(Configuration);
+            services.AddBootstrapEvent(Configuration); // add this
+        }
+
+        // other
+    }
+}
+```
